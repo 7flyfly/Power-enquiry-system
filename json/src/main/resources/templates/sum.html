@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function cheackFirstValue(obj) {
+            var value=obj.value;
+            var checkFirstValueResult = document.getElementById("firsterror");
+            var pat=new RegExp("^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$");
+            if (value.trim().length==0){
+                checkFirstValueResult.innerHTML="不能为空";
+                checkFirstValueResult.style.visibility="visible";
+            }else if(pat.test(value)!=true){
+                checkFirstValueResult.innerHTML = "非法字符";
+                checkFirstValueResult.style.visibility="visible";
+            }else {
+                checkFirstValueResult.innerHTML = "";
+                checkFirstValueResult.style.visibility="hidden";
+            }
+        }
+        function cheackSecondValue(obj) {
+            var value=obj.value;
+            var checkSecondValueResult = document.getElementById("seconderror");
+            var pat=new RegExp("^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$");
+            if (value.trim().length==0){
+                checkSecondValueResult.innerHTML="不能为空";
+                checkSecondValueResult.style.visibility="visible";
+            }else if(pat.test(value)!=true){
+                checkSecondValueResult.innerHTML = "非法字符";
+                checkSecondValueResult.style.visibility="visible";
+            }else {
+                checkSecondValueResult.innerHTML = "";
+                checkSecondValueResult.style.visibility="hidden";
+            }
+        }
+    </script>
+</head>
+<body>
+
+<form th:action="@{/sumpost}" method="post" >
+    输入两个数求和：<br>
+    <input type="text"id="first" name="first"  th:value="${first}" onblur="cheackFirstValue(this);"><div class="a" id="firsterror"></div>
+    +<input type="text"id="second" name="second" th:value="${second}" onblur="cheackSecondValue(this);"><div class="b" id="seconderror"></div>
+    =<input type="text" name="sum" id="sum" th:value="${sum}">
+    <input type="submit" value="提交"/>
+
+</form>
+</body>
+
+
+</html>
